@@ -85,3 +85,50 @@ Email functionality requires valid SMTP credentials
 
 License
 This project is licensed under the MIT License.
+
+
+
+
+**Important Note: Database Setup**
+Before running this Traffic Violation Detection System, you must populate the database with initial data. The system requires the following tables to be properly initialized:
+
+Required Database Tables
+tutors table - Stores teacher/tutor information
+
+students table - Stores student information with tutor associations
+
+violations table - Will store detected violations (auto-populated)
+
+email_logs table - Will store email notifications (auto-populated)
+
+How to Add Initial Data
+1. Adding Tutors/Teachers
+You need to add at least one tutor record to enable login:
+
+sql
+INSERT INTO tutors (name, email, department) 
+VALUES ('Admin Teacher', 'teacher@school.edu', 'Computer Science');
+2. Adding Students
+Add student records with their photos (as BLOBs) and associate them with tutors:
+
+sql
+INSERT INTO students (roll_no, name, tutor_id, department, photo)
+VALUES 
+('CS001', 'John Doe', 1, 'Computer Science', [photo_blob]),
+('CS002', 'Jane Smith', 1, 'Computer Science', [photo_blob]);
+3. Important Notes
+The system comes with a default login password "12345678"
+
+Student photos should be properly cropped face images for best recognition results
+
+You can use SQLite browser tools to import photos as BLOBs
+
+The tutor email in the database must match the login email
+
+Verification
+After adding data, verify your tables contain records by running:
+
+sql
+SELECT * FROM tutors;
+SELECT * FROM students;
+The system will automatically create and manage the violations and email_logs tables during operation.
